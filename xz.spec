@@ -3,7 +3,7 @@
 Summary:	LZMA compression utilities
 Name:		xz
 Version:	4.999.9
-Release:	0.3.beta.%{git_date}git.1%{?dist}
+Release:	0.4.beta.%{git_date}git%{?dist}
 License:	LGPLv2+
 Group:		Applications/File
 # source created as "make dist" in checked out GIT tree
@@ -108,7 +108,7 @@ rm -rf %{buildroot}
 %{_mandir}/man1/*lz*
 
 %changelog
-* Fri Jul  8 2011 Mike Adams <shalkie@gooseproject.org> 4.999.9-0.3.20091007.beta.1
+* Fri Jul  8 2011 Mike Adams <shalkie@gooseproject.org> 4.999.9-0.4.20091007.beta
 - Rebuild for GoOSe Linux 6
 
 * Tue Feb 23 2010 Jindrich Novy <jnovy@redhat.com> 4.999.9-0.3.20091007.beta
