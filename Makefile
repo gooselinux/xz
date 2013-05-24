@@ -1,6 +1,7 @@
-# This makefile is downloading any file found in 
-# the 'sources' file already existing in this directory
-# and validating the sha256sum of the archive against it.
+# This makefile is downloading any file listed in the 'sources'
+# file in this directory and validating the md5sum of the archive
+# against it.
+
 NAME := xz
 
 define find-common-dir
@@ -10,17 +11,3 @@ COMMON_DIR := $(shell $(find-common-dir))
 
 include $(COMMON_DIR)/Makefile.common
 
-SOURCEFILES := $(shell cat sources 2>/dev/null | awk '{ print $$2 }' | awk -F'*' '{ print $$2 }')
-
-sources: $(SOURCEFILES)
-
-$(SOURCEFILES):
-	@for sourcefile in $(SOURCEFILES); do \
-		HASH := $(shell cat sources 2>/dev/null | grep $${sourcefile} | awk '{ print $$1 }')
-		$(CLIENT) $(LOOKASIDE_URI)/$(NAME)/$(HASH)/$${sourcefile}; \
-	done
-
-	sha256sum -c sources || ( echo 'SHA256 check failed' && rm $(SOURCEFILES); exit 1 )
-
-clean:
-	rm $(SOURCEFILES)
