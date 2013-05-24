@@ -16,7 +16,8 @@ sources: $(SOURCEFILES)
 
 $(SOURCEFILES):
 	@for sourcefile in $(SOURCEFILES); do \
-	    $(CLIENT) $(LOOKASIDE_URI)/$(NAME)/$${sourcefile}; \
+		HASH := $(shell cat sources 2>/dev/null | grep $${sourcefile} | awk '{ print $$1 }')
+		$(CLIENT) $(LOOKASIDE_URI)/$(NAME)/$(HASH)/$${sourcefile}; \
 	done
 
 	sha256sum -c sources || ( echo 'SHA256 check failed' && rm $(SOURCEFILES); exit 1 )
